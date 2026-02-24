@@ -6,7 +6,9 @@ bash bootstrap.sh
 kubectl get pods -n todoapp -l app=todoapp
 # copy 1 of 2 pods name
 
-kubectl get sa,role,rolebinding -n todoapp
+kubectl get sa secrets-reader -n todoapp
+kubectl get role pod-secrets-reader -n todoapp
+kubectl get rolebinding pod-secrets-reader-binding -n todoapp
 # check created sa,role,rolebinding
 
 
@@ -20,4 +22,4 @@ TOKEN=$(cat ${SERVICEACCOUNT}/token)
 CACERT=${SERVICEACCOUNT}/ca.crt
 
 curl --cacert ${CACERT} -H "Authorization: Bearer $TOKEN" ${APISERVER}/api/v1/namespaces/todoapp/secrets
-# Create screenshot with secrets and attach it to your PR
+# Take a screenshot of the curl output showing the secrets, attach the image to your PR, and paste the PR link in your submission so validators can access it.
